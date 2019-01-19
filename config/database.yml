@@ -1,4 +1,4 @@
-<% project_name = 'will-travel-for-food' %>
+<% project_name = 'willtravelforfood' %>
 
 default: &default
   adapter: postgresql
