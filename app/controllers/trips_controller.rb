@@ -4,7 +4,7 @@ class TripsController < ProtectedController
   # GET /examples
   # GET /examples.json
   def index
-    @trips = current_user.trips.order(date: :asc)
+    @trips = current_user.trips
     render json: @trips
   end
 
@@ -44,12 +44,14 @@ class TripsController < ProtectedController
     head :no_content
   end
 
+  private
+
   def set_trip
     @trip = current_user.trips.find(params[:id])
   end
 
   def trip_params
-    params.require(:trip).permit(:city, :date, :user_id, :restaurant)
+    params.require(:trip).permit(:city, :date, :user_id)
   end
 
   private :set_trip, :trip_params
