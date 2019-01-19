@@ -1,30 +1,33 @@
-class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :update, :destroy]
+class TripsController < ProtectedController
+  before_action :set_trip, only: %i[show update destroy]
 
-  # GET /trips
+  # GET /examples
+  # GET /examples.json
   def index
-    @trips = Trip.all
-
+    @trips = current_user.trips.order(date: :asc)
     render json: @trips
   end
 
-  # GET /trips/1
+  # GET /examples/1
+  # GET /examples/1.json
   def show
     render json: @trip
   end
 
-  # POST /trips
+  # POST /examples
+  # POST /examples.json
   def create
-    @trip = Trip.new(trip_params)
+    @trip = current_user.trips.build(trip_params)
 
     if @trip.save
-      render json: @trip, status: :created, location: @trip
+      render json: @trip, status: :created
     else
       render json: @trip.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /trips/1
+  # PATCH/PUT /examples/1
+  # PATCH/PUT /examples/1.json
   def update
     if @trip.update(trip_params)
       render json: @trip
@@ -33,19 +36,21 @@ class TripsController < ApplicationController
     end
   end
 
-  # DELETE /trips/1
+  # DELETE /examples/1
+  # DELETE /examples/1.json
   def destroy
     @trip.destroy
+
+    head :no_content
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_trip
-      @trip = Trip.find(params[:id])
-    end
+  def set_trip
+    @trip = current_user.trips.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def trip_params
-      params.require(:trip).permit(:city, :date)
-    end
+  def trip_params
+    params.require(:trip).permit(:city, :date, :user_id, :restaurant)
+  end
+
+  private :set_trip, :trip_params
 end
