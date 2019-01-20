@@ -8,6 +8,7 @@ curl "http://localhost:4741/trips" \
   --data '{
     "trip": {
       "user_id": "'"${ID}"'",
+      "restaurant_id": "'"${R_ID}"'",
       "city": "'"${C}"'",
       "date": "'"${D}"'"
     }
