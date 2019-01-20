@@ -7,7 +7,7 @@ curl "http://localhost:4741/restaurants" \
   --header "Authorization: Token token=${TOKEN}" \
   --data '{
     "restaurant": {
-      "user_id": "'"${U_ID}"'",
+      "trip_id": "'"${ID}"'",
       "name": "'"${N}"'",
       "address": "'"${A}"'",
       "telephone": "'"${T}"'",
