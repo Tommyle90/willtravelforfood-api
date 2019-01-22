@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_01_20_030000) do
     t.bigint "trip_id"
     t.string "name"
     t.string "address"
-    t.integer "telephone"
+    t.string "telephone"
     t.string "dish"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

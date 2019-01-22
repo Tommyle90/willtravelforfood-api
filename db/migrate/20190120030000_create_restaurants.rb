@@ -4,7 +4,7 @@ class CreateRestaurants < ActiveRecord::Migration[5.2]
       t.references :trip, foreign_key: true
       t.string :name
       t.string :address
-      t.integer :telephone
+      t.string :telephone
       t.string :dish
 
       t.timestamps
