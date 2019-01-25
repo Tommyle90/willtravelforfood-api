@@ -1,9 +1,9 @@
-class RestaurantsController < ApplicationController
+class RestaurantsController < ProtectedController
   before_action :set_restaurant, only: [:show, :update, :destroy]
 
   # GET /restaurants
   def index
-    @restaurants = Restaurant.all
+    @restaurants = current_user.restaurants
 
     render json: @restaurants
   end
@@ -15,7 +15,7 @@ class RestaurantsController < ApplicationController
 
   # POST /restaurants
   def create
-    @restaurant = Restaurant.new(restaurant_params)
+    @restaurant = current_user.restaurants.build(restaurant_params)
 
     if @restaurant.save
       render json: @restaurant, status: :created, location: @restaurant
@@ -41,11 +41,12 @@ class RestaurantsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_restaurant
-      @restaurant = Restaurant.find(params[:id])
+      @restaurant = current_user.restaurants.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def restaurant_params
-      params.require(:restaurant).permit(:trip_id, :name, :address, :telephone, :dish)
+      params.require(:restaurant).permit(:trip_id, :name, :address, :telephone, :dish, :user_id)
     end
+    private :set_restaurant, :restaurant_params
 end

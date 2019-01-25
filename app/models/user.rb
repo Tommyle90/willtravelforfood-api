@@ -4,7 +4,7 @@ class User < ApplicationRecord
   include Authentication
   has_many :examples
   has_many :trips
-  has_many :restaurants, through: :trips
+  has_many :restaurants
 
   validates :email, :password, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
