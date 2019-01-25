@@ -1,5 +1,5 @@
 class RestaurantsController < ProtectedController
-  before_action :set_restaurant, only: [:show, :update, :destroy]
+  before_action :set_restaurant, only: %i[show update destroy]
 
   # GET /restaurants
   def index
@@ -39,14 +39,15 @@ class RestaurantsController < ProtectedController
   end
 
   private
-    # Use callbacks  to share common setup or constraints between actions.
-    def set_restaurant
-      @restaurant = current_user.restaurants.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def restaurant_params
-      params.require(:restaurant).permit(:trip_id, :name, :address, :telephone, :dish, :user_id)
+  # Use callbacks  to share common setup or constraints between actions.
+  def set_restaurant
+    @restaurant = current_user.restaurants.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def restaurant_params
+    params.require(:restaurant).permit(:trip_id, :name, :address, :telephone, :dish, :user_id)
     end
-    private :set_restaurant, :restaurant_params
+  private :set_restaurant, :restaurant_params
 end
