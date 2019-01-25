@@ -39,7 +39,7 @@ class RestaurantsController < ProtectedController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks  to share common setup or constraints between actions.
     def set_restaurant
       @restaurant = current_user.restaurants.find(params[:id])
     end
