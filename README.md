@@ -39,7 +39,7 @@ Will Travel for Food is a website for making a traveling itinerary. You enter in
 |--------|------------------------|-------------------|
 | POST   | `/trips`               | `Trips#create`    |
 | GET    | `/trips`               | `Trips#index`     |
-| GET    | `/trips/:id`           | `Trips#index`     |
+| GET    | `/trips/:id`           | `Trips#show`     |
 | PATCH  | `/trips/:id`           | `Trips#update`    |
 | DELETE | `/trips/:id`           | `Trips#destroy`   |
 
